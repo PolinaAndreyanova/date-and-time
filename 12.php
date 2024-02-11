@@ -1,15 +1,20 @@
 <?php
 function AddDates($new, $dates) {
     $isAdd = true;
+
     if (str_contains($new, " - ")) {
         $arNew = explode(" - ", $new);
+
         $newDateStart = strtotime($arNew[0]);
         $newDateEnd = strtotime($arNew[1]);
-        foreach($dates as $key => $value) {
+
+        foreach ($dates as $value) {
             if (str_contains($value, " - ")) {
                 $arValue = explode(" - ", $value);
+
                 $bookedStart = strtotime($arValue[0]);
                 $bookedEnd = strtotime($arValue[1]);
+
                 if (($newDateStart <= $bookedEnd) && ($newDateEnd >= $bookedStart)) {
                     // echo 1;
                     $isAdd = false;
@@ -17,6 +22,7 @@ function AddDates($new, $dates) {
                 }
             } else {
                 $booked = strtotime($value);
+
                 if (($newDateStart <= $booked) || ($newDateEnd >= $booked)) {
                     // echo 2;
                     $isAdd = false;
@@ -26,11 +32,14 @@ function AddDates($new, $dates) {
         }
     } else {
         $newDate = strtotime($new);
-        foreach($dates as $key => $value) {
+
+        foreach ($dates as $value) {
             if (str_contains($value, " - ")) {
                 $arValue = explode(" - ", $value);
+
                 $bookedStart = strtotime($arValue[0]);
                 $bookedEnd = strtotime($arValue[1]);
+
                 if (($newDate <= $bookedEnd) || ($newDate >= $bookedStart)) {
                     // echo 3;
                     $isAdd = false;
@@ -38,6 +47,7 @@ function AddDates($new, $dates) {
                 }
             } else {
                 $booked = strtotime($value);
+
                 if ($newDate == $booked) {
                     // echo 4;
                     $isAdd = false;
@@ -46,6 +56,7 @@ function AddDates($new, $dates) {
             }
         }
     }
+    
     return $isAdd;
 }
 

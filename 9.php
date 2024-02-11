@@ -1,6 +1,7 @@
 <?php
 function TimeToArray($time) {
     $arTime = explode(":", $time);
+
     return [
         "h" => $arTime[0],
         "m" => $arTime[1]
@@ -9,9 +10,11 @@ function TimeToArray($time) {
 
 function Timetable($arStart, $arEnd) {
     $arTimetable = [];
+
     $start = $arStart["h"] * 60 + $arStart["m"];
     $end = $arEnd["h"] * 60 + $arEnd["m"];
     $now = $start;
+
     while (($now + 45) <= $end) {
         $h = floor($now / 60);
         $newNow = $now + 45;
@@ -28,13 +31,15 @@ function Timetable($arStart, $arEnd) {
         ];
         $now = $newNow + 10;
     }
+
     return $arTimetable;
 }
 
-$startTime = "09:05";
-$endTime = "16:50";
+$startTime = "08:30";
+$endTime = "20:00";
 
 $arRes = Timetable(TimeToArray($startTime), TimeToArray($endTime));
-foreach ($arRes as $key => $value) {
+
+foreach ($arRes as $value) {
     echo sprintf("%02d:%02d - %02d:%02d", $value["start"]["h"], $value["start"]["m"], $value["end"]["h"], $value["end"]["m"]) . "<br>";
 }

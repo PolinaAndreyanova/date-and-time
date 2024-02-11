@@ -1,13 +1,16 @@
 <?php
 function WorkTime($arDates) {
     $time = 0;
-    foreach ($arDates as $key => $value) {
+
+    foreach ($arDates as $value) {
         $start = strtotime($value["start"]);
         $end = strtotime($value["end"]);
         $time += $end - $start;
     }
+
     $h = floor($time / 3600);
     $m = floor($time / 60) - ($h *60);
+
     return sprintf("%d часов, %d минут", $h, $m);
 }
 
@@ -23,4 +26,5 @@ $arDates = [
 ];
 
 $res = WorkTime($arDates);
+
 echo $res;

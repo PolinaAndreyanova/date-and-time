@@ -1,11 +1,13 @@
 <?php
 function DateToArray($date) {
     $arDate = explode(".", $date);
+
     $arNewDate = [
         "d" => $arDate[0],
         "m" => $arDate[1],
         "y" => $arDate[2],
     ];
+
     return $arNewDate;
 }
 
@@ -15,17 +17,17 @@ function Compare($date1, $date2) {
 
     if ($arDate1["y"] < $arDate2["y"]) {
         return $arDate1;
-    } else if ($arDate1["y"] > $arDate2["y"]) {
+    } elseif ($arDate1["y"] > $arDate2["y"]) {
         return $arDate2;
     } else {
         if ($arDate1["m"] < $arDate2["m"]) {
             return $arDate1;
-        } else if ($arDate1["m"] > $arDate2["m"]) {
+        } elseif ($arDate1["m"] > $arDate2["m"]) {
             return $arDate2;
         } else {
             if ($arDate1["d"] < $arDate2["d"]) {
                 return $arDate1;
-            } else if ($arDate1["d"] > $arDate2["d"]) {
+            } elseif ($arDate1["d"] > $arDate2["d"]) {
                 return $arDate2;
             } else {
                 return [];
