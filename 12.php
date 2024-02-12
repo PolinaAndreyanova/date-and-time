@@ -23,7 +23,7 @@ function AddDates($new, $dates) {
             } else {
                 $booked = strtotime($value);
 
-                if (($newDateStart <= $booked) || ($newDateEnd >= $booked)) {
+                if (($newDateStart <= $booked) && ($newDateEnd >= $booked)) {
                     // echo 2;
                     $isAdd = false;
                     break;
@@ -40,7 +40,7 @@ function AddDates($new, $dates) {
                 $bookedStart = strtotime($arValue[0]);
                 $bookedEnd = strtotime($arValue[1]);
 
-                if (($newDate <= $bookedEnd) || ($newDate >= $bookedStart)) {
+                if (($newDate <= $bookedEnd) && ($newDate >= $bookedStart)) {
                     // echo 3;
                     $isAdd = false;
                     break;
@@ -65,7 +65,7 @@ $dates = [
     "14.09.2017 - 02.10.2017"
 ];
 
-$res = AddDates("05.09.2017 - 13.09.2017", $dates);
+$res = AddDates("05.10.2017", $dates);
 
 if ($res) {
     echo "Данную дату или период можно добавить в массив для нового бронирования";
