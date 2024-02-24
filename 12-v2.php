@@ -79,9 +79,13 @@ function AddDates($new, $dates) {
 
 $CSV_FILE = "dates.csv";
 
-$arNewDates = [$_REQUEST["dateStart"]];
-if ($_REQUEST["dateEnd"]) {
-    $arNewDates[] = $_REQUEST["dateEnd"];
+$dateStart = $_POST["dateStart"];
+$dateEnd = $_POST["dateEnd"];
+$arNewDates = [$dateStart];
+if ($dateEnd) {
+    if ($dateEnd !== $dateStart) {
+        $arNewDates[] = $_POST["dateEnd"];
+    }
 }
 
 $arDates = readCSV($CSV_FILE);
@@ -90,6 +94,7 @@ $res = AddDates($arNewDates, $arDates);
 
 if ($res) {
     writeCSV($CSV_FILE, $arNewDates);
+    print_r($arNewDates);
     $feedbsck = "Данную дату или период можно добавить в массив для нового бронирования";
 } else {
     $feedbsck = "Данную дату или период нельзя добавить в массив для нового бронирования";
